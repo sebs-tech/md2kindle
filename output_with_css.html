@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to HTML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <p>To convert an HTML file with an external CSS file into a PDF using Python, you can use a library called <strong><code>pdfkit</code></strong>, which is a Python wrapper for <strong>wkhtmltopdf</strong>. This tool allows you to generate PDF files from HTML documents while preserving styles from the linked CSS.</p>
+<p>Here’s a step-by-step guide on how to do this:</p>
+<h3>Step 1: Install the Required Tools</h3>
+<ol>
+<li><strong>Install <code>wkhtmltopdf</code></strong>
+   You need to install <code>wkhtmltopdf</code>, which is the underlying tool used by <code>pdfkit</code> to convert HTML to PDF. On Ubuntu, you can install it with:</li>
+</ol>
+<p><code>bash
+   sudo apt update
+   sudo apt install wkhtmltopdf</code></p>
+<p>On other systems, you can download it from <a href="https://wkhtmltopdf.org/downloads.html">wkhtmltopdf official downloads</a>.</p>
+<ol>
+<li><strong>Install the <code>pdfkit</code> Python Library</strong>
+   After <code>wkhtmltopdf</code> is installed, install the <code>pdfkit</code> library using <code>pip</code>:</li>
+</ol>
+<p><code>bash
+   pip install pdfkit</code></p>
+<h3>Step 2: Write the Python Script</h3>
+<p>Once the necessary tools are installed, you can use the following Python script to convert an HTML file with an external CSS file into a PDF:</p>
+<p>~~~python
+import pdfkit</p>
+<h1>Path to your HTML file and CSS file</h1>
+<p>html_file = 'example.html'
+css_file = 'style.css'
+output_pdf = 'output.pdf'</p>
+<h1>Define options for wkhtmltopdf</h1>
+<p>options = {
+    'encoding': 'UTF-8',  # Set character encoding
+    'no-outline': None,   # Disable outline in the PDF
+    'enable-local-file-access': None  # Enable local file access for CSS
+}</p>
+<h1>Convert HTML file to PDF with CSS</h1>
+<p>pdfkit.from_file(html_file, output_pdf, options=options, css=css_file)</p>
+<p>print(f'HTML with CSS has been converted to {output_pdf}')
+~~~</p>
+<h3>Step 3: Prepare Your HTML and CSS</h3>
+<p>Ensure that your HTML and CSS files are in the same directory or provide absolute paths to the files. Here's an example structure:</p>
+<ul>
+<li><code>example.html</code></li>
+<li><code>style.css</code></li>
+<li><code>convert_to_pdf.py</code></li>
+</ul>
+<p>For example, <code>example.html</code> could look like this:</p>
+<p>```html</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample HTML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Hello, PDF!</h1>
+    <p>This is an example of converting HTML with CSS into a PDF using Python.</p>
+</body>
+</html>
+<p>```</p>
+<p>And <code>style.css</code> could look like this:</p>
+<p>```css
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}</p>
+<p>h1 {
+    color: #2c3e50;
+}
+```</p>
+<h3>Step 4: Run the Python Script</h3>
+<p>After preparing the HTML, CSS, and Python script, run the script:</p>
+<p><code>bash
+python convert_to_pdf.py</code></p>
+<p>This will generate <code>output.pdf</code> with the styles from <code>style.css</code> applied to the HTML content.</p>
+<h3>Step 5: View the PDF</h3>
+<p>Once the script runs successfully, you should find <code>output.pdf</code> in the same directory. You can open it using any PDF viewer to check the result.</p>
+<h3>Optional: Convert HTML from URL or String</h3>
+<p>If you want to convert HTML content from a URL or string instead of a file, you can use the following methods:</p>
+<ol>
+<li>
+<p><strong>Convert HTML from URL</strong>:
+   <code>python
+   pdfkit.from_url('https://example.com', 'output.pdf')</code></p>
+</li>
+<li>
+<p><strong>Convert HTML from String</strong>:
+   ```python
+   html_string = """
+ <br />
+<html><head><link rel="stylesheet" href="style.css"></head>
+   <body><h1>Test</h1><p>This is a test</p></body></html></p>
+</li>
+</ol>
+<p>"""
+   pdfkit.from_string(html_string, 'output.pdf', css='style.css')
+   ```</p>
+<p>With this approach, you can easily convert HTML files with CSS styling into PDF using Python.</p>
+</body>
+</html>
